@@ -15,9 +15,6 @@ public class RoleService {
 
     public Role createRole(String name) {
         log.info("create role:{}", name);
-        if (name == null) {
-            throw new AuthException(ErrCode.ERR_PARAMS_INVALID);
-        }
         if (roleRegistry.get(name) != null) {
             throw new AuthException(ErrCode.ERR_ROLE_ALREADY_EXISTS);
         }
@@ -25,7 +22,7 @@ public class RoleService {
         Role role = Role.builder()
                 .name(name)
                 .build();
-        roleRegistry.put(name, role);
+        roleRegistry.putIfAbsent(name, role); // use put may override prev one, so use putIfAbsent
 
         log.info("create role {} succeed.", name);
         return role;
@@ -33,10 +30,6 @@ public class RoleService {
 
     public Role delRole(String name) {
         log.info("del role:{}", name);
-        if (name == null) {
-            throw new AuthException(ErrCode.ERR_PARAMS_INVALID);
-        }
-
         Role role = roleRegistry.remove(name);
         if (role == null) {
             throw new AuthException(ErrCode.ERR_ROLE_NOT_EXISTS);

@@ -20,7 +20,10 @@ public class UserService {
         }
 
         User user = User.build(name, password);
-        userRegistry.put(name, user);
+        User old = userRegistry.putIfAbsent(name, user); // use put may override prev one, so use putIfAbsent
+        if (old != null) {
+            throw new AuthException(ErrCode.ERR_USER_ALREADY_EXISTS);
+        }
 
         log.info("create user {} succeed.", name);
         return user;
