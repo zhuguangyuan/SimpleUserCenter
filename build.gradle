@@ -24,6 +24,10 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.2.9'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+// https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter
+    implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
+
 }
 
 test {
