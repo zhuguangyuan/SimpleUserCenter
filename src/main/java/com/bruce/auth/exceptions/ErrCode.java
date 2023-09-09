@@ -16,6 +16,7 @@ public enum ErrCode {
     // role err
     ERR_ROLE_ALREADY_EXISTS(1001011, "role already exists"),
     ERR_ROLE_NOT_EXISTS(1001013, "role not exists"),
+    ERR_ROLE_IN_USE(1001015, "role in use, can not delete"),
     // token err
     ERR_TOKEN_INVALID(1001021, "token invalid, or expire."),
 

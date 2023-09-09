@@ -6,12 +6,15 @@ import com.bruce.auth.models.Role;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @Slf4j
 public class RoleService {
     private final ConcurrentHashMap<String, Role> roleRegistry = new ConcurrentHashMap<>(16);
+    private final Set<Role> inUseSet = new HashSet<>();
 
     public Role createRole(String name) {
         log.info("create role:{}", name);
@@ -30,6 +33,11 @@ public class RoleService {
 
     public Role delRole(String name) {
         log.info("del role:{}", name);
+        if (inUseSet.stream().anyMatch(item -> item.getName().equals(name))) {
+            log.info("role {} in use by user. can not delete.", name);
+            throw new AuthException(ErrCode.ERR_ROLE_IN_USE);
+        }
+
         Role role = roleRegistry.remove(name);
         if (role == null) {
             throw new AuthException(ErrCode.ERR_ROLE_NOT_EXISTS);
@@ -42,5 +50,9 @@ public class RoleService {
     public Role getRole(String name) {
         log.info("get role:{}", name);
         return roleRegistry.get(name);
+    }
+
+    public boolean setRoleInUse(Role role) {
+        return inUseSet.add(role);
     }
 }

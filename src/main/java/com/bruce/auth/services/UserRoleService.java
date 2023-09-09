@@ -46,6 +46,7 @@ public class UserRoleService {
             }
 
             roles.add(role);
+            roleService.setRoleInUse(role);
             userRolesMap.put(userName, roles);
         }
 
