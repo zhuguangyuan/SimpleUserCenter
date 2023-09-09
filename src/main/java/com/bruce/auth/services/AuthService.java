@@ -9,12 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @Slf4j
 public class AuthService {
     private final ConcurrentHashMap<String, TokenInfo> tokenMap = new ConcurrentHashMap<>(16);
+    private final PriorityQueue<TokenInfo> tokenExpireTimer = new PriorityQueue<>(Comparator.comparingLong(TokenInfo::getExpireTime));
 
     @Value("${user.token.ttl:10000}")
     private String tokenTTL;
@@ -30,6 +33,7 @@ public class AuthService {
         }
         TokenInfo tokenInfo = TokenInfo.generateNew(user.getName(), this.getTtl());
         tokenMap.put(tokenInfo.getToken(), tokenInfo);
+        tokenExpireTimer.offer(tokenInfo); // timeout will remove
 
         log.info("user login succeed:{}, tokenInfo:{}", name, tokenInfo);
         return tokenInfo.getToken();
@@ -63,5 +67,18 @@ public class AuthService {
 
     private long getTtl() {
         return Long.parseLong(tokenTTL);
+    }
+
+    public void removeExpireToken() {
+        log.info("removeExpireToken begin");
+        while (!tokenExpireTimer.isEmpty()
+                && tokenExpireTimer.peek().getExpireTime() < System.currentTimeMillis()) {
+            TokenInfo expireToken = tokenExpireTimer.poll();
+            if (expireToken != null) {
+                log.info("token expire, will remove:{}", expireToken);
+                tokenMap.remove(expireToken.getToken());
+            }
+        }
+        log.info("removeExpireToken end");
     }
 }

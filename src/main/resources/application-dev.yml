@@ -1,0 +1,4 @@
+user:
+  token:
+    ttl: 2000
+    checkInterval: "0 */1 * * * ?"
