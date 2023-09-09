@@ -37,4 +37,20 @@ public class UserService {
         log.info("del user {} succeed.", name);
         return user;
     }
+
+    /**
+     * get user with password
+     * @param name name of user
+     * @param password password of user
+     * @return return user if user exists, and password is correct,
+     * else return null
+     */
+    public User getWithPassword(String name, String password) {
+        User user = userRegistry.get(name);
+        if (user == null || !user.checkPassCorrect(password)) {
+            return null;
+        }
+
+        return user;
+    }
 }

@@ -1,0 +1,3 @@
+user:
+  token:
+    ttl: 7200000

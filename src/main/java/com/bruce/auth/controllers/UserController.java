@@ -4,12 +4,14 @@ import com.bruce.auth.models.Role;
 import com.bruce.auth.models.User;
 import com.bruce.auth.models.vo.RoleVo;
 import com.bruce.auth.models.vo.UserVo;
+import com.bruce.auth.services.AuthService;
 import com.bruce.auth.services.RoleService;
 import com.bruce.auth.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +22,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private AuthService authService;
 
     @PostMapping("/user/create")
     public UserVo createUser(@RequestBody Map<String, String> params) {
@@ -65,15 +69,17 @@ public class UserController {
     @PostMapping("/user/auth/login")
     public String login(@RequestBody Map<String, String> params) {
         log.info("login req:{}", params);
-
-        return null;
+        String name = params.get("name");
+        String password = params.get("password");
+        return authService.login(name, password);
     }
 
     @PostMapping("/user/auth/logout")
     public Boolean logout(@RequestBody Map<String, String> params) {
         log.info("logout req:{}", params);
-
-        return false;
+        String token = params.get("token");
+        authService.logout(token);
+        return true;
     }
 
     @PostMapping("/user/role/add")

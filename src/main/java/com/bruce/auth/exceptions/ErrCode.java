@@ -12,6 +12,8 @@ public enum ErrCode {
     // user err
     ERR_USER_ALREADY_EXISTS(1001001, "user already exists"),
     ERR_USER_NOT_EXISTS(1001003, "user not exists"),
+    ERR_USER_PASSWORD_NOT_MATCH(1001005, "user and password not match, may be not registry or password incorrect."),
+
     // role err
     ERR_ROLE_ALREADY_EXISTS(1001011, "role already exists"),
     ERR_ROLE_NOT_EXISTS(1001013, "role not exists"),
