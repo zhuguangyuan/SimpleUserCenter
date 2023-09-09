@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Random;
 
 @Component
@@ -43,14 +44,16 @@ public class CryptUtils {
 
     /**
      * generate salt with length of n
+     *
      * @param n length of the target salt
      * @return salt
      */
     public static String generateSalt(int n) {
         char[] chars = "ABCDEFGHIJKLMNOPORSTUMXYZabcdefghiiklmnopgrstuvwxyz0123456789!@#$%&*)".toCharArray();
         StringBuilder sb = new StringBuilder();
+        SecureRandom secureRandom = new SecureRandom();
         for (int i = 0; i < n; i++) {
-            char aChar = chars[new Random().nextInt(chars.length)];
+            char aChar = chars[secureRandom.nextInt(chars.length)];
             sb.append(aChar);
         }
         return sb.toString();
