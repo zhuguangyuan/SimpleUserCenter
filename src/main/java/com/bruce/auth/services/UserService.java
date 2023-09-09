@@ -53,4 +53,9 @@ public class UserService {
 
         return user;
     }
+
+    public User getUser(String name) {
+        log.info("get user:{}", name);
+        return userRegistry.get(name);
+    }
 }

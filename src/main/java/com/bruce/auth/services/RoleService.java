@@ -45,4 +45,9 @@ public class RoleService {
         log.info("del role {} succeed.", name);
         return role;
     }
+
+    public Role getRole(String name) {
+        log.info("get role:{}", name);
+        return roleRegistry.get(name);
+    }
 }
