@@ -57,8 +57,11 @@ public class AuthService {
             return null;
         }
         TokenInfo tokenInfo = tokenMap.get(token);
-        if (tokenInfo == null || !tokenInfo.valid()) {
+        if (tokenInfo == null) {
             return null;
+        }
+        if (!tokenInfo.valid()) {
+            tokenMap.remove(tokenInfo.getToken());
         }
 
         log.info("get token by check succeed, tokenInfo:{}", tokenInfo);
