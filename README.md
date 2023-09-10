@@ -60,5 +60,6 @@
   .\gradlew.bat compileTestJava
   .\gradlew.bat test
   ```
+- check the config in `application-dev.yaml` and modify it as you want.
 - run `AuthApplication`
 - goto [swagger page and try the API](http://localhost:8080/swagger-ui/index.html)
