@@ -19,7 +19,8 @@ public class UserController {
 
     @PostMapping("/user/create")
     public UserVo createUser(@RequestBody Map<String, String> params) {
-        log.info("createUser req:{}", params);
+//        should not log user's password
+//        log.info("createUser req:{}", params);
         String userName = params.get("name");
         String password = params.get("password");
         User user = userService.createUser(userName, password);

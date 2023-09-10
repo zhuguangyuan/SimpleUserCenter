@@ -17,7 +17,8 @@ public class AuthController {
 
     @PostMapping("/user/auth/login")
     public String login(@RequestBody Map<String, String> params) {
-        log.info("login req:{}", params);
+//        should not log user's password
+//        log.info("login req:{}", params);
         String name = params.get("name");
         String password = params.get("password");
         return authService.login(name, password);
