@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class UserVo {
+public class UserRspVo {
     private String name;
 }

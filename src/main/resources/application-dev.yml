@@ -1,6 +1,6 @@
 user:
   token:
-    ttl: 2000
+    ttl: 20000
     checkInterval: "0 */1 * * * ?"
 swagger:
   enabled: true
