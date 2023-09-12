@@ -14,7 +14,9 @@ public class SortBase {
         EXCHANGE,
         SELECT,
         INSERT,
-        QUICK_EXCHANGE, // 快排
+        QUICK_EXCHANGE1, // 快排
+        QUICK_EXCHANGE2, // 快排
+        QUICK_EXCHANGE3, // 快排
         HEAP_SELECT, // 堆选择
         SHELL_INSERT, // 希尔插入
     }
@@ -36,14 +38,9 @@ public class SortBase {
         arr[b] = temp;
     }
 
-    protected void printArr(int[] arr) {
-        if (arr == null) {
-            return;
-        }
-
-        for (int i : arr) {
-            System.out.print(i + ", ");
-        }
-        System.out.println();
+    protected int[] copyOf(int[] arr, int begin, int end) {
+        int[] copy = new int[end - begin + 1];
+        System.arraycopy(arr, begin, copy, 0, end - begin + 1);
+        return copy;
     }
 }

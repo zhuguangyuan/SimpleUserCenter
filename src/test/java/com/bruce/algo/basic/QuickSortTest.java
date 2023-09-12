@@ -18,6 +18,11 @@ class QuickSortTest {
         int[] result = {1, 1, 2, 2, 3, 3, 4, 5, 5, 6};
 
         Assertions.assertArrayEquals(result,
-                quickSort.quickSort(Arrays.copyOf(arr, arr.length), 0, arr.length - 1, 0, SortBase.SortType.QUICK_EXCHANGE));
+                quickSort.quickSort(Arrays.copyOf(arr, arr.length), 0, arr.length - 1, 0, SortBase.SortType.QUICK_EXCHANGE1));
+        Assertions.assertArrayEquals(result,
+                quickSort.quickSort(Arrays.copyOf(arr, arr.length), 0, arr.length - 1, 0, SortBase.SortType.QUICK_EXCHANGE2));
+        Assertions.assertArrayEquals(result,
+                quickSort.quickSort(Arrays.copyOf(arr, arr.length), 0, arr.length - 1, 0, SortBase.SortType.QUICK_EXCHANGE3));
+
     }
 }
