@@ -3,20 +3,17 @@ package com.bruce.algo.basic;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.Random;
+
 @Slf4j
 @Component
 public class QuickSort extends SortBase {
-    /**
-     * 选择不同的分区函数进行排序
-     *
-     * @param arr      待排序数组
-     * @param left     左下标
-     * @param right    右下标
-     * @param depth    递归深度
-     * @param sortType 分区类型
-     * @return
-     */
-    public int[] quickSort(int[] arr, int left, int right, int depth, SortType sortType) {
+    @Override
+    int[] sort(int[] arr, SortType sortType) {
+        return quickSort(arr, 0, arr.length - 1, sortType, 0);
+    }
+
+    public int[] quickSort(int[] arr, int left, int right, SortType sortType, int depth) {
         log.warn("{}-depth:{}", sortType, depth);
         if (left >= right) {
             return arr;
@@ -36,8 +33,8 @@ public class QuickSort extends SortBase {
                 break;
         }
         log.warn("{}-depth:{}, arr:{}, pivot:{}", sortType, depth, arr, pivot);
-        quickSort(arr, left, pivot[0] - 1, depth + 1, sortType);
-        quickSort(arr, pivot[1] + 1, right, depth + 1, sortType);
+        quickSort(arr, left, pivot[0] - 1, sortType, depth + 1);
+        quickSort(arr, pivot[1] + 1, right, sortType, depth + 1);
         return arr;
     }
 
@@ -113,5 +110,70 @@ public class QuickSort extends SortBase {
         log.warn("partition3 end. depth:{}, arr:{}", depth, copyOf(arr, originLeft, originRight));
 
         return new int[]{left, right};
+    }
+
+
+    /**
+     * 双路快排的一些优化
+     */
+    // 选择一个枢纽，并将小于等于枢纽元素的元素放在左边，大于等于枢纽元素的元素放在右边
+    // 同时返回枢纽元素的左边界和右边界
+    // 注释掉的部分是 对于数组中重复元素较多的情况下的优化
+    private int[] partition(int[] arr, int left, int right) {
+//        int leftIndex = left;
+//        int rightIndex = right;
+//        int oldLeft = left;
+//        int oldRight = right;
+
+        int key = getKey(arr, left, right);
+        int pivot = left;
+
+        // 先从右到左选出小于枢纽元素的值，用于和枢纽元素做交换
+        // 再从左到右，选出比枢纽元素大的值，和枢纽元素做交换
+        // 为了减少交换次数，可以以上两步中只交换选中的两个元素
+        // 退出循环的时候再交换枢纽元素和中间值
+        while (left < right) {
+            while (left < right && arr[right] >= key) {
+                right--;
+            }
+            while (left < right && arr[left] <= key) {
+                left++;
+            }
+            swap(arr, left, right);
+        }
+        while (left < right) {
+            while (left < right && arr[right] >= key) {
+//                if (arr[right] == key) {
+//                    swap(arr,right,rightIndex);
+//                    rightIndex--;
+//                }
+                right--;
+            }
+            while (left < right && arr[left] <= key) {
+//                if (arr[left] == key) {
+//                    swap(arr,leftIndex,left);
+//                    leftIndex++;
+//                }
+                left++;
+            }
+            swap(arr, left, right);
+        }
+        swap(arr, pivot, left);
+
+//        while(--leftIndex >= oldLeft && arr[--left] != key) {
+//            swap(arr,leftIndex,left);
+//        }
+//        while(++rightIndex <= oldRight && arr[++right] != key) {
+//            swap(arr,right,rightIndex);
+//        }
+
+        return new int[]{left, right};
+    }
+
+    // 选取随机枢纽元素, 同时将它调到第一个位置
+    private int getKey(int[] arr, int left, int right) {
+        int randomIndex = new Random().nextInt(right - left) + left;
+        swap(arr, left, randomIndex);
+        return arr[left];
     }
 }

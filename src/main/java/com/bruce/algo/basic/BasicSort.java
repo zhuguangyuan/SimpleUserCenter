@@ -9,6 +9,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class BasicSort extends SortBase {
+    @Override
+    int[] sort(int[] arr, SortType sortType) {
+        return basicSort(arr, sortType);
+    }
+
     public int[] basicSort(int[] arr, SortType sortType) {
         log.warn("basicSort, {} begin:{}", sortType, arr);
         int n = arr.length;
