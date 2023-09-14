@@ -5,13 +5,14 @@ import "moviecontroller/moviecontroller.proto";
 option java_package = "com.bruce.grpc.proto.userpreferences";
 option java_multiple_files = true;
 
-message UserPreferenceRequest {
+message UserPreferencesRequest {
   string userid = 1;
   common.Movie movie = 2;
 }
-message UserPreferenceResponse {
+message UserPreferencesResponse {
   common.Movie movie = 1;
 }
-service UserPreferenceService {
-  rpc getShortListedMovies(stream UserPreferenceRequest) returns (stream UserPreferenceResponse) {}
+service UserPreferencesService {
+  // Bidirectional streaming rpc call to receive a stream of movies shortlisted based on user preferences
+  rpc getShortlistedMovies(stream UserPreferencesRequest) returns (stream UserPreferencesResponse) {};
 }

@@ -12,5 +12,6 @@ message MovieStoreResponse {
   common.Movie movie = 1;
 }
 service MovieStoreService {
+  // server streaming rpc call to receive a stream of movies
   rpc getMovies(MovieStoreRequest) returns (stream MovieStoreResponse) {};
 }
