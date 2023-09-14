@@ -1,7 +1,7 @@
 syntax = "proto3";
 package moviecontroller;
 import "common/common.proto";
-option java_package = "com.proto.moviecontroller";
+option java_package = "com.bruce.grpc.proto.moviecontroller";
 option java_multiple_files = true;
 
 message MovieRequest {

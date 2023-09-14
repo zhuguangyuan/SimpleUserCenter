@@ -2,7 +2,7 @@ syntax = "proto3";
 package userpreferences;
 import "common/common.proto";
 import "moviecontroller/moviecontroller.proto";
-option java_package = "com.proto.userpreferences";
+option java_package = "com.bruce.grpc.proto.userpreferences";
 option java_multiple_files = true;
 
 message UserPreferenceRequest {
