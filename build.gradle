@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.15'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    // for grpc
+    id 'com.google.protobuf' version '0.8.14'
 }
 
 group = 'org.bruce'
@@ -12,9 +14,26 @@ java {
 }
 
 repositories {
+    maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
     mavenCentral()
 }
 
+def protoBufVersion = "1.34.1"
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.12.0"
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:${protoBufVersion}"
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+}
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
@@ -28,6 +47,10 @@ dependencies {
 // https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter
     implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
 
+    // for grpc
+    implementation("io.grpc:grpc-netty-shaded:${protoBufVersion}")
+    implementation("io.grpc:grpc-protobuf:${protoBufVersion}")
+    implementation("io.grpc:grpc-stub:${protoBufVersion}")
 }
 
 test {
