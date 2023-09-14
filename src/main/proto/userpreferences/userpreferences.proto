@@ -1,0 +1,17 @@
+syntax = "proto3";
+package userpreferences;
+import "common/common.proto";
+import "moviecontroller/moviecontroller.proto";
+option java_package = "com.proto.userpreferences";
+option java_multiple_files = true;
+
+message UserPreferenceRequest {
+  string userid = 1;
+  common.Movie movie = 2;
+}
+message UserPreferenceResponse {
+  common.Movie movie = 1;
+}
+service UserPreferenceService {
+  rpc getShortListedMovies(stream UserPreferenceRequest) returns (stream UserPreferenceResponse) {}
+}
