@@ -5,11 +5,3 @@ user:
 #    check expire token every 1 min
     checkInterval: "0 */1 * * * ?"
 #    enable swagger, if want to disable, set to false
-swagger:
-  enabled: true
-# config for solving swagger documentationPluginsBootstrapper err
-# can be remove if disable swagger
-# ref: https://webfuse.in/blogs/issues-troubleshooting/how-to-fix-failed-to-start-bean-documentationpluginsbootstrapper-use-springdoc-openapi-ui/
-spring:
-  mvc:
-    pathmatch.matching-strategy: ANT_PATH_MATCHER
