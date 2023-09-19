@@ -1,8 +1,10 @@
 # 测试自定义 tomcat 连接参数时 服务器的并发能力
 server:
   tomcat:
+#    tcp 维度的参数, accept-count即 tcp_back_log
     max-connections: 30
     accept-count: 10
+#    工作线程池维度参数
     threads:
       min-spare: 10
       max: 20
