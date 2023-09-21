@@ -1,0 +1,14 @@
+-- schema for transaction_propagation test
+CREATE TABLE auth_user (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    salt VARCHAR(10) NOT NULL,
+    PRIMARY KEY (id)
+)  ENGINE=INNODB , CHARACTER SET=UTF8;
+
+CREATE TABLE auth_role (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+)  ENGINE=INNODB , CHARACTER SET=UTF8;

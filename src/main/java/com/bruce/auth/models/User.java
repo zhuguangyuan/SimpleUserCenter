@@ -13,12 +13,14 @@ import java.util.Objects;
 @NoArgsConstructor
 @Builder
 public class User {
+    private Long id;
     private String name;
     private String password;
     private String salt;
 
     public static User build(String name, String password) {
         User user = new User();
+        user.setId(0L);
         user.setName(name);
 
         String salt = CryptUtils.generateSalt(8);

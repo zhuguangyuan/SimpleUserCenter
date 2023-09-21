@@ -1,7 +1,28 @@
 user:
   token:
-#    token ttl ms
+    #    token ttl ms
     ttl: 20000
-#    check expire token every 1 min
+    #    check expire token every 1 min
     checkInterval: "0 */1 * * * ?"
 #    enable swagger, if want to disable, set to false
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/payment_trader_test?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=UTC&useLocalSessionState=true&useSSL=false&allowPublicKeyRetrieval=true
+    default-transaction-isolation: 2
+    auto-commit: false
+    hikari:
+      maximum-pool-size: 20
+      minimum-Idle: 20
+      pool-name: master
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 600000
+      leak-detection-threshold: 30000
+      auto-commit: false
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

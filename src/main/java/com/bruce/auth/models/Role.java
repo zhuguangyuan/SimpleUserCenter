@@ -10,5 +10,6 @@ import java.util.Objects;
 @AllArgsConstructor
 @Builder
 public class Role {
+    private Long id;
     private String name;
 }
