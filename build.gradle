@@ -61,6 +61,12 @@ dependencies {
     implementation("io.grpc:grpc-protobuf:${protoBufVersion}")
     implementation("io.grpc:grpc-stub:${protoBufVersion}")
     implementation "com.google.protobuf:protobuf-java:3.19.1"
+    //
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+    // https://mvnrepository.com/artifact/net.sf.json-lib/json-lib
+    implementation group: 'net.sf.json-lib', name: 'json-lib', version: '2.4', classifier: 'jdk13'
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.14'
+
 }
 
 test {

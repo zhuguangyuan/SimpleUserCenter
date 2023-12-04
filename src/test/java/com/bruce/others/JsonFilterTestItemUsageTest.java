@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JsonFilterTestItemUsage {
+public class JsonFilterTestItemUsageTest {
 
     @Test
     void testJsonSerializeFilter() throws JsonProcessingException {
