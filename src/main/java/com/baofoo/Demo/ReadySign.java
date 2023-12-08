@@ -26,7 +26,7 @@ public class ReadySign {
     public static void main(String[] args) throws Exception {
         String send_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());//报文发送日期时间
 
-        String Cardinfo = "6228480476455953239|李丽|140411197811240424|18616092709||";//账户信息[银行卡号|持卡人姓名|证件号|手机号|银行卡安全码|银行卡有效期]
+        String Cardinfo = "6222022221490592120|高知秀|110104198712061243|18570027166||";//账户信息[银行卡号|持卡人姓名|证件号|手机号|银行卡安全码|银行卡有效期]
 
         String MemberId = "100030266";//商户号
         String TerminalId = "200005528";//终端号

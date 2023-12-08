@@ -11,7 +11,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: root
+    password: 123456
     url: jdbc:mysql://localhost:3306/payment_trader_test?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=UTC&useLocalSessionState=true&useSSL=false&allowPublicKeyRetrieval=true
     default-transaction-isolation: 2
     auto-commit: false
