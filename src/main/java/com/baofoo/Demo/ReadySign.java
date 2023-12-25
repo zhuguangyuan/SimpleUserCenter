@@ -26,14 +26,14 @@ public class ReadySign {
     public static void main(String[] args) throws Exception {
         String send_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());//报文发送日期时间
 
-        String Cardinfo = "6222022221490592120|高知秀|110104198712061243|18570027166||";//账户信息[银行卡号|持卡人姓名|证件号|手机号|银行卡安全码|银行卡有效期]
+        String Cardinfo = "6212263602115721508|王立健|441781199106036715|13631438469||";//账户信息[银行卡号|持卡人姓名|证件号|手机号|银行卡安全码|银行卡有效期]
 
-        String MemberId = "100030266";//商户号
-        String TerminalId = "200005528";//终端号
+        String MemberId = "1277170";//商户号
+        String TerminalId = "84923";//终端号
 
-        String pfxpath = "D:\\projects\\dev\\bqloan\\src\\main\\resources\\baofoo\\config\\bfkey_private_key.pfx";//商户私钥
-        String cerpath = "D:\\projects\\dev\\bqloan\\src\\main\\resources\\baofoo\\config\\bfkey_public_key.cer";//宝付公钥
-        String pfxpwd = "123456";//私钥密码
+        String pfxpath = "D:\\bruce\\codes\\SimpleUserCenter\\src\\main\\resources\\baofoo\\config\\bfkey_private_key.pfx";//商户私钥
+        String cerpath = "D:\\bruce\\codes\\SimpleUserCenter\\src\\main\\resources\\baofoo\\config\\bfkey_public_key.cer";//宝付公钥
+        String pfxpwd = "520112";//私钥密码
 
         String AesKey = FormatUtil.CreateAeskey();//商户自定义（可随机生成  商户自定义(AES key长度为=16位)）
         String dgtl_envlp = "01|" + AesKey;//使用接收方的公钥加密后的对称密钥，并做Base64转码，明文01|对称密钥，01代表AES[密码商户自定义]
@@ -66,7 +66,7 @@ public class ReadySign {
         Log.Write("RSA签名结果：" + Sign);
         DateArry.put("signature", Sign);//签名域
 
-        String PostString = HttpUtil.RequestForm("https://vgw.baofoo.com/cutpayment/protocol/backTransRequest", DateArry);
+        String PostString = HttpUtil.RequestForm("https://public.baofoo.com/cutpayment/protocol/backTransRequest", DateArry);
         Log.Write("请求返回:" + PostString);
 
         Map<String, String> ReturnData = FormatUtil.getParm(PostString);

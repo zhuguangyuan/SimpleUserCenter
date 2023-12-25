@@ -42,7 +42,12 @@ public class SignatureUtils {
      * 签名
      */
     public static String encryptByRSA(String encryptStr, String pfxPath, String priKeyPass)throws Exception {
+        System.out.println("准备拿秘钥 encryptStr: " + encryptStr);
+        System.out.println("准备拿秘钥 pfxPath: " + pfxPath);
+        System.out.println("准备拿秘钥 priKeyPass: " + priKeyPass);
         PrivateKey privateKey = RsaReadUtil.getPrivateKeyFromFile(pfxPath, priKeyPass);
+        System.out.println("准备拿秘钥 privateKey: " + privateKey);
+
         return  sign(encryptStr.getBytes("UTF-8") ,privateKey.getEncoded());
     }
 

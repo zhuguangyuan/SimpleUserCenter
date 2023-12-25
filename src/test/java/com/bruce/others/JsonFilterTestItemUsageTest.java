@@ -8,10 +8,6 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class JsonFilterTestItemUsageTest {
 
     @Test
@@ -46,15 +42,5 @@ public class JsonFilterTestItemUsageTest {
         Assertions.assertNotNull(jsonFilterUsageItem2.getF1());
         Assertions.assertNotNull(jsonFilterUsageItem2.getF2());
         Assertions.assertNotNull(jsonFilterUsageItem2.getF3());
-    }
-
-    @Test
-    public void te1() {
-        List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 4, 5,7,8,6));
-
-        boolean hasConsecutiveSequence = numbers.stream()
-                .anyMatch(n -> numbers.contains(n + 1) && numbers.contains(n + 2));
-
-        System.out.println("Has consecutive sequence: " + hasConsecutiveSequence);
     }
 }

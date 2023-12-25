@@ -22,21 +22,22 @@ public class ConfirmSign {
 	public static void main(String[] args) throws Exception {
 		String send_time=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());//报文发送日期时间		
 
-		String MemberId = "100030266";//商户号
-		String TerminalId = "200005528";//终端号
+		String MemberId = "1277170";//商户号
+		String TerminalId = "84923";//终端号
 
-		String pfxpath = "D:\\projects\\dev\\bqloan\\src\\main\\resources\\baofoo\\config\\bfkey_private_key.pfx";//商户私钥
-		String cerpath = "D:\\projects\\dev\\bqloan\\src\\main\\resources\\baofoo\\config\\bfkey_public_key.cer";//宝付公钥
-		String pfxpwd = "123456";//私钥密码
+		String pfxpath = "D:\\bruce\\codes\\SimpleUserCenter\\src\\main\\resources\\baofoo\\config\\bfkey_private_key.pfx";//商户私钥
+		String cerpath = "D:\\bruce\\codes\\SimpleUserCenter\\src\\main\\resources\\baofoo\\config\\bfkey_public_key.cer";//宝付公钥
+		String pfxpwd = "520112";//私钥密码
+
 
         String SMSStr="123456";//短信验证码，测试环境随机6位数;生产环境验证码预绑卡成功后发到用户手机。确认绑卡时回传。
-        
+
         String AesKey = FormatUtil.CreateAeskey();//商户自定义（可随机生成  商户自定义(AES key长度为=16位)）
 		String dgtl_envlp = "01|"+AesKey;//使用接收方的公钥加密后的对称密钥，并做Base64转码，明文01|对称密钥，01代表AES[密码商户自定义]
 		
 		Log.Write("密码dgtl_envlp："+dgtl_envlp);		
 		dgtl_envlp = RsaCodingUtil.encryptByPubCerFile(SecurityUtil.Base64Encode(dgtl_envlp), cerpath);//公钥加密	
-		String UniqueCode = "202312081146263075474|"+SMSStr;//预签约唯一码(预绑卡返回的值)[格式：预签约唯一码|短信验证码]
+		String UniqueCode = "202312191558483082111|"+SMSStr;//预签约唯一码(预绑卡返回的值)[格式：预签约唯一码|短信验证码]
 		Log.Write("预签约唯一码："+UniqueCode);	
 		UniqueCode = SecurityUtil.AesEncrypt(SecurityUtil.Base64Encode(UniqueCode), AesKey);//先BASE64后进行AES加密
 		Log.Write("AES结果:"+UniqueCode);
