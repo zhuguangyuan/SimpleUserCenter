@@ -24,5 +24,7 @@ spring:
       max-lifetime: 600000
       leak-detection-threshold: 30000
       auto-commit: false
+  main:
+    allow-circular-references: true
 mybatis:
   mapper-locations: classpath:mapper/*.xml
